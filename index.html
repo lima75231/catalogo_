@@ -297,10 +297,26 @@
       border-color: #111827;
     }
 
-    .catalogo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1.25rem;
+    /* 🔹 Carrossel */
+    .catalogo-carousel {
+      position: relative;
+    }
+
+    .catalogo-faixa {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 0.5rem;
+      scrollbar-width: thin;
+    }
+
+    .catalogo-faixa::-webkit-scrollbar {
+      height: 6px;
+    }
+    .catalogo-faixa::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+      border-radius: 999px;
     }
 
     .produto-card {
@@ -311,6 +327,9 @@
       border: 1px solid rgba(15, 23, 42, 0.06);
       display: flex;
       flex-direction: column;
+      min-width: 260px;      /* tamanho mínimo do card no carrossel */
+      max-width: 280px;
+      scroll-snap-align: start;
     }
 
     .produto-imagem {
@@ -389,6 +408,34 @@
       background: var(--cor-secundaria);
       border-color: var(--cor-secundaria);
       color: #111827;
+    }
+
+    .carrossel-controles {
+      position: absolute;
+      top: 40%;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .btn-carrossel {
+      pointer-events: all;
+      border: none;
+      border-radius: 999px;
+      width: 32px;
+      height: 32px;
+      background: rgba(17, 24, 39, 0.85);
+      color: #f9fafb;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-carrossel:hover {
+      background: rgba(17, 24, 39, 1);
     }
 
     /* CONTATO */
@@ -580,14 +627,13 @@
     </div>
   </section>
 
-  <!-- CATÁLOGO -->
+  <!-- CATÁLOGO (CARROSSEL) -->
   <section id="catalogo">
     <div class="section-inner">
       <h2 class="section-title">Catálogo de Produtos</h2>
       <p class="section-subtitle">
-        Produtos organizados por categoria. Os valores não são exibidos, o
-        foco é nas informações técnicas. Para orçamentos, utilize os botões de
-        contato.
+        Navegue pelos produtos arrastando para o lado ou utilizando as setas.
+        Os valores não são exibidos, o foco é nas informações técnicas.
       </p>
 
       <div class="catalogo-controls">
@@ -606,156 +652,25 @@
           </button>
         </div>
         <small style="color: #6b7280">
-          <!-- Você pode editar essa observação -->
           Clique em “Solicitar orçamento” para ser direcionado ao atendimento.
         </small>
       </div>
 
-      <div class="catalogo-grid">
-        <!-- PRODUTO 1 -->
-        <article
-          class="produto-card"
-          data-categoria="porcelanato"
-        >
-          <div class="produto-imagem">
-            Imagem do produto
-            <!-- Substituir por <img> se desejar -->
-          </div>
-          <div class="produto-conteudo">
-            <div class="produto-titulo">
-              Porcelanato Marmorizado Branco 84x84
-            </div>
-            <div class="produto-meta">
-              Acabamento polido &bull; Indicado para salas, halls e áreas
-              nobres.
-            </div>
-            <div class="produto-tags">
-              <span class="tag">Porcelanato</span>
-              <span class="tag">84x84</span>
-              <span class="tag">Polido</span>
-            </div>
-            <div class="produto-footer">
-              <div class="produto-codigo">Ref.: PEX-001</div>
-              <div class="produto-acoes">
-                <button class="btn-mini">Ver detalhes</button>
-                <a
-                  class="btn-mini primary"
-                  href="https://wa.me/55DDDNUMERO?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Porcelanato%20Marmorizado%20Branco%2084x84%20(Ref.%20PEX-001)."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Solicitar orçamento
-                </a>
-              </div>
-            </div>
-          </div>
-        </article>
+      <div class="catalogo-carousel">
+        <!-- Setas do carrossel -->
+        <div class="carrossel-controles">
+          <button type="button" class="btn-carrossel" data-direcao="esq">
+            ‹
+          </button>
+          <button type="button" class="btn-carrossel" data-direcao="dir">
+            ›
+          </button>
+        </div>
 
-        <!-- PRODUTO 2 -->
-        <article
-          class="produto-card"
-          data-categoria="porcelanato"
-        >
-          <div class="produto-imagem">Imagem do produto</div>
-          <div class="produto-conteudo">
-            <div class="produto-titulo">
-              Porcelanato Cimento Queimado 100x100
-            </div>
-            <div class="produto-meta">
-              Acabamento acetinado &bull; Ideal para ambientes modernos e
-              minimalistas.
-            </div>
-            <div class="produto-tags">
-              <span class="tag">Porcelanato</span>
-              <span class="tag">100x100</span>
-              <span class="tag">Acetinado</span>
-            </div>
-            <div class="produto-footer">
-              <div class="produto-codigo">Ref.: PEX-002</div>
-              <div class="produto-acoes">
-                <button class="btn-mini">Ver detalhes</button>
-                <a
-                  class="btn-mini primary"
-                  href="https://wa.me/55DDDNUMERO?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Porcelanato%20Cimento%20Queimado%20100x100%20(Ref.%20PEX-002)."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Solicitar orçamento
-                </a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- PRODUTO 3 -->
-        <article
-          class="produto-card"
-          data-categoria="revestimento"
-        >
-          <div class="produto-imagem">Imagem do produto</div>
-          <div class="produto-conteudo">
-            <div class="produto-titulo">
-              Revestimento 30x60 Texturizado Branco
-            </div>
-            <div class="produto-meta">
-              Ideal para paredes internas, banheiros e cozinhas.
-            </div>
-            <div class="produto-tags">
-              <span class="tag">Revestimento</span>
-              <span class="tag">30x60</span>
-            </div>
-            <div class="produto-footer">
-              <div class="produto-codigo">Ref.: PEX-101</div>
-              <div class="produto-acoes">
-                <button class="btn-mini">Ver detalhes</button>
-                <a
-                  class="btn-mini primary"
-                  href="https://wa.me/55DDDNUMERO?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Revestimento%2030x60%20Texturizado%20Branco%20(Ref.%20PEX-101)."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Solicitar orçamento
-                </a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- PRODUTO 4 -->
-        <article
-          class="produto-card"
-          data-categoria="complemento"
-        >
-          <div class="produto-imagem">Imagem do produto</div>
-          <div class="produto-conteudo">
-            <div class="produto-titulo">
-              Rodapé Porcelanato Branco 10x84
-            </div>
-            <div class="produto-meta">
-              Complemento para porcelanatos claros, acabamento sofisticado.
-            </div>
-            <div class="produto-tags">
-              <span class="tag">Complemento</span>
-              <span class="tag">Rodapé</span>
-            </div>
-            <div class="produto-footer">
-              <div class="produto-codigo">Ref.: PEX-201</div>
-              <div class="produto-acoes">
-                <button class="btn-mini">Ver detalhes</button>
-                <a
-                  class="btn-mini primary"
-                  href="https://wa.me/55DDDNUMERO?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Rodap%C3%A9%20Porcelanato%20Branco%2010x84%20(Ref.%20PEX-201)."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Solicitar orçamento
-                </a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- AQUI VOCÊ PODE COPIAR E COLAR MAIS <article> PARA NOVOS PRODUTOS -->
+        <!-- Faixa que o JS vai preencher -->
+        <div class="catalogo-faixa" id="faixa-produtos">
+          <!-- Os cards serão criados via JavaScript -->
+        </div>
       </div>
     </div>
   </section>
@@ -863,7 +778,7 @@
         reservados.
       </div>
       <div>
-        Catálogo desenvolvido em HTML. <!-- Você pode colocar seu nome aqui -->
+        Catálogo desenvolvido em HTML.
       </div>
     </div>
   </footer>
@@ -873,9 +788,144 @@
     document.getElementById("ano-atual").textContent =
       new Date().getFullYear();
 
-    // Filtro simples de categorias do catálogo
+    // 🔹 1. LISTA DE PRODUTOS (JSON)
+    const produtos = [
+      {
+        codigo: "PEX-001",
+        nome: "Porcelanato Marmorizado Branco 84x84",
+        categoria: "porcelanato",
+        linha: "Linha Marmorizada",
+        medida: "84x84",
+        acabamento: "Polido",
+        descricao: "Indicado para salas, halls e áreas nobres.",
+        tags: ["Porcelanato", "84x84", "Polido"],
+        imagem: "img/porcelanato-marmorizado-84x84.jpg",
+        whatsappTexto:
+          "Ol%C3%A1%2C%20tenho%20interesse%20no%20Porcelanato%20Marmorizado%20Branco%2084x84%20(Ref.%20PEX-001)."
+      },
+      {
+        codigo: "PEX-002",
+        nome: "Porcelanato Cimento Queimado 100x100",
+        categoria: "porcelanato",
+        linha: "Linha Cimento Queimado",
+        medida: "100x100",
+        acabamento: "Acetinado",
+        descricao: "Ideal para ambientes modernos e minimalistas.",
+        tags: ["Porcelanato", "100x100", "Acetinado"],
+        imagem: "img/porcelanato-cimento-100x100.jpg",
+        whatsappTexto:
+          "Ol%C3%A1%2C%20tenho%20interesse%20no%20Porcelanato%20Cimento%20Queimado%20100x100%20(Ref.%20PEX-002)."
+      },
+      {
+        codigo: "PEX-101",
+        nome: "Revestimento 30x60 Texturizado Branco",
+        categoria: "revestimento",
+        linha: "Linha Revestimentos",
+        medida: "30x60",
+        acabamento: "Texturizado",
+        descricao: "Ideal para paredes internas, banheiros e cozinhas.",
+        tags: ["Revestimento", "30x60"],
+        imagem: "img/revestimento-30x60.jpg",
+        whatsappTexto:
+          "Ol%C3%A1%2C%20tenho%20interesse%20no%20Revestimento%2030x60%20Texturizado%20Branco%20(Ref.%20PEX-101)."
+      },
+      {
+        codigo: "PEX-201",
+        nome: "Rodapé Porcelanato Branco 10x84",
+        categoria: "complemento",
+        linha: "Linha Complementos",
+        medida: "10x84",
+        acabamento: "—",
+        descricao:
+          "Complemento para porcelanatos claros, acabamento sofisticado.",
+        tags: ["Complemento", "Rodapé"],
+        imagem: "img/rodape-10x84.jpg",
+        whatsappTexto:
+          "Ol%C3%A1%2C%20tenho%20interesse%20no%20Rodap%C3%A9%20Porcelanato%20Branco%2010x84%20(Ref.%20PEX-201)."
+      }
+      // 👉 Aqui você vai adicionando mais objetos de produto
+    ];
+
+    // Substitua pelo DDD + número da PEMACO (só dígitos)
+    const WHATSAPP_BASE = "55DDDNUMERO";
+
+    // 🔹 2. FUNÇÃO PARA CRIAR O CARD HTML DE CADA PRODUTO
+    function criarCardProduto(produto) {
+      const artigo = document.createElement("article");
+      artigo.classList.add("produto-card");
+      artigo.setAttribute("data-categoria", produto.categoria);
+
+      artigo.innerHTML = `
+        <div class="produto-imagem">
+          ${
+            produto.imagem
+              ? `<img src="${produto.imagem}" alt="${produto.nome}" style="width:100%;height:100%;object-fit:cover;">`
+              : "Imagem do produto"
+          }
+        </div>
+        <div class="produto-conteudo">
+          <div class="produto-titulo">
+            ${produto.nome}
+          </div>
+          <div class="produto-meta">
+            ${produto.linha ? produto.linha + " • " : ""}${
+        produto.medida ? produto.medida + " • " : ""
+      }${produto.acabamento || ""}
+            <br>
+            <span style="font-size:0.8rem;color:#6b7280;">
+              ${produto.descricao || ""}
+            </span>
+          </div>
+          <div class="produto-tags">
+            ${produto.tags
+              .map((tag) => `<span class="tag">${tag}</span>`)
+              .join("")}
+          </div>
+          <div class="produto-footer">
+            <div class="produto-codigo">Ref.: ${produto.codigo}</div>
+            <div class="produto-acoes">
+              <button class="btn-mini">Ver detalhes</button>
+              <a
+                class="btn-mini primary"
+                href="https://wa.me/${WHATSAPP_BASE}?text=${produto.whatsappTexto}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Solicitar orçamento
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+
+      return artigo;
+    }
+
+    // 🔹 3. RENDERIZAÇÃO INICIAL DOS PRODUTOS NA FAIXA
+    const faixa = document.getElementById("faixa-produtos");
+
+    function renderizarProdutos(filtroCategoria = "todos") {
+      faixa.innerHTML = ""; // limpa antes de recriar
+
+      const produtosFiltrados = produtos.filter((p) => {
+        if (filtroCategoria === "todos") return true;
+        return p.categoria === filtroCategoria;
+      });
+
+      produtosFiltrados.forEach((produto) => {
+        const card = criarCardProduto(produto);
+        faixa.appendChild(card);
+      });
+
+      // volta o scroll para o início
+      faixa.scrollTo({ left: 0, behavior: "smooth" });
+    }
+
+    // Renderiza todos ao carregar
+    renderizarProdutos();
+
+    // 🔹 4. FILTROS DE CATEGORIA
     const botoesFiltro = document.querySelectorAll(".btn-filtro");
-    const produtos = document.querySelectorAll(".produto-card");
 
     botoesFiltro.forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -884,13 +934,23 @@
         botoesFiltro.forEach((b) => b.classList.remove("ativo"));
         btn.classList.add("ativo");
 
-        produtos.forEach((produto) => {
-          const catProduto = produto.getAttribute("data-categoria");
-          if (categoria === "todos" || catProduto === categoria) {
-            produto.style.display = "flex";
-          } else {
-            produto.style.display = "none";
-          }
+        renderizarProdutos(categoria);
+      });
+    });
+
+    // 🔹 5. CONTROLES DO CARROSSEL (SETAS)
+    const botoesCarrossel = document.querySelectorAll(".btn-carrossel");
+
+    botoesCarrossel.forEach((botao) => {
+      botao.addEventListener("click", () => {
+        const direcao = botao.getAttribute("data-direcao");
+        const larguraCard = 280; // base aproximada do card
+        const deslocamento =
+          direcao === "dir" ? larguraCard * 1.5 : -larguraCard * 1.5;
+
+        faixa.scrollBy({
+          left: deslocamento,
+          behavior: "smooth"
         });
       });
     });
