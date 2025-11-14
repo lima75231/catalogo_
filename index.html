@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PEMACO EXCLUSIVE - Catálogo de Produtos</title>
+  <style>
+    :root {
+      --cor-primaria: #1f2933;
+      --cor-secundaria: #e5b15a;
+      --cor-fundo: #f5f5f5;
+      --cor-card: #ffffff;
+      --cor-texto: #111827;
+      --cor-texto-secundario: #4b5563;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: var(--cor-fundo);
+      color: var(--cor-texto);
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* HEADER / NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(31, 41, 55, 0.95);
+      backdrop-filter: blur(10px);
+      color: #fff;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    .logo span {
+      color: var(--cor-secundaria);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+    }
+
+    nav a {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    nav a:hover {
+      opacity: 1;
+      color: var(--cor-secundaria);
+    }
+
+    /* HERO */
+    .hero {
+      background: radial-gradient(circle at top left, #374151, #111827);
+      color: #fff;
+      padding: 3rem 1rem 3.5rem;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 0.95rem;
+      color: #e5e7eb;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge {
+      border-radius: 999px;
+      border: 1px solid rgba(229, 181, 90, 0.5);
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease,
+        background 0.15s ease, color 0.15s ease;
+    }
+
+    .btn-primary {
+      background: var(--cor-secundaria);
+      color: #111827;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #e5e7eb;
+      border: 1px solid rgba(229, 231, 235, 0.3);
+    }
+
+    .btn-outline:hover {
+      background: rgba(229, 231, 235, 0.08);
+    }
+
+    .hero-highlight {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--cor-secundaria);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-right {
+      background: rgba(17, 24, 39, 0.7);
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      border: 1px solid rgba(229, 231, 235, 0.08);
+    }
+
+    .hero-right h2 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .mini-list {
+      font-size: 0.85rem;
+      color: #d1d5db;
+      list-style: none;
+      display: grid;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .mini-list li::before {
+      content: "▹ ";
+      color: var(--cor-secundaria);
+    }
+
+    .hero-note {
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    /* SEÇÕES GERAIS */
+    section {
+      padding: 2.5rem 1rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--cor-texto-secundario);
+      margin-bottom: 1.5rem;
+    }
+
+    /* SOBRE */
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--cor-card);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+    }
+
+    .sobre-texto {
+      font-size: 0.95rem;
+      color: var(--cor-texto-secundario);
+    }
+
+    .sobre-pill {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+      color: var(--cor-secundaria);
+    }
+
+    .sobre-lista {
+      list-style: none;
+      margin-top: 0.75rem;
+      display: grid;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--cor-texto-secundario);
+    }
+
+    .sobre-lista li::before {
+      content: "✓ ";
+      color: #16a34a;
+      font-weight: 600;
+    }
+
+    /* CATÁLOGO */
+    .catalogo-controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .filtros {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .btn-filtro {
+      font-size: 0.8rem;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      padding: 0.25rem 0.8rem;
+      background: #f9fafb;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, border 0.15s ease;
+    }
+
+    .btn-filtro.ativo {
+      background: #111827;
+      color: #f9fafb;
+      border-color: #111827;
+    }
+
+    .catalogo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .produto-card {
+      background: var(--cor-card);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .produto-imagem {
+      height: 160px;
+      background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    .produto-conteudo {
+      padding: 1rem 1.1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      flex: 1;
+    }
+
+    .produto-titulo {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .produto-meta {
+      font-size: 0.8rem;
+      color: var(--cor-texto-secundario);
+    }
+
+    .produto-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      margin-top: 0.25rem;
+      font-size: 0.7rem;
+    }
+
+    .tag {
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background: #f3f4f6;
+      color: #374151;
+    }
+
+    .produto-footer {
+      margin-top: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .produto-codigo {
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
+    .produto-acoes {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-mini {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      cursor: pointer;
+    }
+
+    .btn-mini.primary {
+      background: var(--cor-secundaria);
+      border-color: var(--cor-secundaria);
+      color: #111827;
+    }
+
+    /* CONTATO */
+    .contato-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 2rem;
+    }
+
+    .contato-info {
+      display: grid;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--cor-texto-secundario);
+    }
+
+    .contato-item strong {
+      color: var(--cor-texto);
+    }
+
+    form {
+      display: grid;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.6rem 0.7rem;
+      border-radius: 0.55rem;
+      border: 1px solid #d1d5db;
+      font-size: 0.85rem;
+      font-family: inherit;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: 2px solid rgba(229, 181, 90, 0.7);
+      border-color: transparent;
+    }
+
+    /* RODAPÉ */
+    footer {
+      background: #111827;
+      color: #9ca3af;
+      padding: 1.25rem 1rem;
+      font-size: 0.75rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .footer-inner a {
+      color: #e5e7eb;
+      text-decoration: underline;
+      font-size: 0.8rem;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 768px) {
+      .hero-inner,
+      .sobre-grid,
+      .contato-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      nav ul {
+        display: none; /* versão simples para início */
+      }
+
+      .hero {
+        padding-top: 2.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">
+        PEMACO <span>EXCLUSIVE</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#catalogo">Catálogo</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-highlight">Catálogo de produtos para construção</div>
+        <h1>PEMACO EXCLUSIVE — acabamentos que valorizam sua obra.</h1>
+        <p>
+          Apresente aos seus clientes porcelanatos e revestimentos de alto
+          padrão, de forma organizada, sem mostrar valores, e direcione o
+          orçamento diretamente para o seu atendimento.
+        </p>
+
+        <div class="hero-badges">
+          <span class="badge">Porcelanatos & revestimentos</span>
+          <span class="badge">Catálogo sem preços</span>
+          <span class="badge">Orçamento via WhatsApp</span>
+        </div>
+
+        <div class="buttons">
+          <a href="#catalogo" class="btn btn-primary">Ver catálogo</a>
+          <a href="#contato" class="btn btn-outline">Falar com a PEMACO</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <h2>Como esse catálogo ajuda nas vendas?</h2>
+        <ul class="mini-list">
+          <li>Organiza as linhas de produtos por categoria.</li>
+          <li>Evita conflito de preço, exibindo apenas informações técnicas.</li>
+          <li>Direciona o cliente para orçamento com um clique.</li>
+          <li>Pode ser acessado no celular, tablet ou computador.</li>
+        </ul>
+        <p class="hero-note">
+          *Os textos institucionais e detalhes da empresa podem ser
+          personalizados posteriormente.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="section-inner">
+      <h2 class="section-title">Sobre a PEMACO EXCLUSIVE</h2>
+      <p class="section-subtitle">
+        Espaço reservado para a história, valores e diferenciais da empresa.
+      </p>
+
+      <div class="sobre-grid">
+        <div class="card">
+          <div class="sobre-pill">História da empresa</div>
+          <p class="sobre-texto">
+            <!-- 
+              TODO: SUBSTITUIR ESTE TEXTO QUANDO RECEBER A HISTÓRIA DA EMPRESA.
+
+              Exemplo de estrutura:
+              - Ano de fundação;
+              - Cidade/Região de atuação;
+              - Foco em materiais de alto padrão;
+              - Compromisso com atendimento personalizado.
+
+            -->
+            A PEMACO EXCLUSIVE é uma empresa especializada em soluções para
+            acabamentos de construção, com foco em porcelanatos, revestimentos
+            e produtos que agregam valor estético e funcional às obras. Este
+            texto é apenas um exemplo e poderá ser substituído
+            posteriormente com a história oficial da empresa.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="sobre-pill">Diferenciais</div>
+          <ul class="sobre-lista">
+            <li>Seleção criteriosa de porcelanatos e revestimentos.</li>
+            <li>Catálogo técnico para facilitar a escolha do cliente.</li>
+            <li>Atendimento para orçamentos personalizado.</li>
+            <li>Possibilidade de atualização constante do catálogo.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO -->
+  <section id="catalogo">
+    <div class="section-inner">
+      <h2 class="section-title">Catálogo de Produtos</h2>
+      <p class="section-subtitle">
+        Produtos organizados por categoria. Os valores não são exibidos, o
+        foco é nas informações técnicas. Para orçamentos, utilize os botões de
+        contato.
+      </p>
+
+      <div class="catalogo-controls">
+        <div class="filtros">
+          <button class="btn-filtro ativo" data-categoria="todos">
+            Todos
+          </button>
+          <button class="btn-filtro" data-categoria="porcelanato">
+            Porcelanatos
+          </button>
+          <button class="btn-filtro" data-categoria="revestimento">
+            Revestimentos
+          </button>
+          <button class="btn-filtro" data-categoria="complemento">
+            Complementos
+          </button>
+        </div>
+        <small style="color: #6b7280">
+          <!-- Você pode editar essa observação -->
+          Clique em “Solicitar orçamento” para ser direcionado ao atendimento.
+        </small>
+      </div>
+
+      <div class="catalogo-grid">
+        <!-- PRODUTO 1 -->
+        <article
+          class="produto-card"
+          data-categoria="porcelanato"
+        >
+          <div class="produto-imagem">
+            Imagem do produto
+            <!-- Substituir por <img> se desejar -->
+          </div>
+          <div class="produto-conteudo">
+            <div class="produto-titulo">
+              Porcelanato Marmorizado Branco 84x84
+            </div>
+            <div class="produto-meta">
+              Acabamento polido &bull; Indicado para salas, halls e áreas
+              nobres.
+            </div>
+            <div class="produto-tags">
+              <span class="tag">Porcelanato</span>
+              <span class="tag">84x84</span>
+              <span class="tag">Polido</span>
+            </div>
+            <div class="produto-footer">
+              <div class="produto-codigo">Ref.: PEX-001</div>
+              <div class="produto-acoes">
+                <button class="btn-mini">Ver detalhes</button>
+                <a
+                  class="btn-mini primary"
+                  href="https://wa.me/55DDDNUMERO?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Porcelanato%20Marmorizado%20Branco%2084x84%20(Ref.%20PEX-001)."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Solicitar orçamento
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- PRODUTO 2 -->
+        <article
+          class="produto-card"
+          data-categoria="porcelanato"
+        >
+          <div class="produto-imagem">Imagem do produto</div>
+          <div class="produto-conteudo">
+            <div class="produto-titulo">
+              Porcelanato Cimento Queimado 100x100
+            </div>
+            <div class="produto-meta">
+              Acabamento acetinado &bull; Ideal para ambientes modernos e
+              minimalistas.
+            </div>
+            <div class="produto-tags">
+              <span class="tag">Porcelanato</span>
+              <span class="tag">100x100</span>
+              <span class="tag">Acetinado</span>
+            </div>
+            <div class="produto-footer">
+              <div class="produto-codigo">Ref.: PEX-002</div>
+              <div class="produto-acoes">
+                <button class="btn-mini">Ver detalhes</button>
+                <a
+                  class="btn-mini primary"
+                  href="https://wa.me/55DDDNUMERO?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Porcelanato%20Cimento%20Queimado%20100x100%20(Ref.%20PEX-002)."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Solicitar orçamento
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- PRODUTO 3 -->
+        <article
+          class="produto-card"
+          data-categoria="revestimento"
+        >
+          <div class="produto-imagem">Imagem do produto</div>
+          <div class="produto-conteudo">
+            <div class="produto-titulo">
+              Revestimento 30x60 Texturizado Branco
+            </div>
+            <div class="produto-meta">
+              Ideal para paredes internas, banheiros e cozinhas.
+            </div>
+            <div class="produto-tags">
+              <span class="tag">Revestimento</span>
+              <span class="tag">30x60</span>
+            </div>
+            <div class="produto-footer">
+              <div class="produto-codigo">Ref.: PEX-101</div>
+              <div class="produto-acoes">
+                <button class="btn-mini">Ver detalhes</button>
+                <a
+                  class="btn-mini primary"
+                  href="https://wa.me/55DDDNUMERO?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Revestimento%2030x60%20Texturizado%20Branco%20(Ref.%20PEX-101)."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Solicitar orçamento
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- PRODUTO 4 -->
+        <article
+          class="produto-card"
+          data-categoria="complemento"
+        >
+          <div class="produto-imagem">Imagem do produto</div>
+          <div class="produto-conteudo">
+            <div class="produto-titulo">
+              Rodapé Porcelanato Branco 10x84
+            </div>
+            <div class="produto-meta">
+              Complemento para porcelanatos claros, acabamento sofisticado.
+            </div>
+            <div class="produto-tags">
+              <span class="tag">Complemento</span>
+              <span class="tag">Rodapé</span>
+            </div>
+            <div class="produto-footer">
+              <div class="produto-codigo">Ref.: PEX-201</div>
+              <div class="produto-acoes">
+                <button class="btn-mini">Ver detalhes</button>
+                <a
+                  class="btn-mini primary"
+                  href="https://wa.me/55DDDNUMERO?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Rodap%C3%A9%20Porcelanato%20Branco%2010x84%20(Ref.%20PEX-201)."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Solicitar orçamento
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- AQUI VOCÊ PODE COPIAR E COLAR MAIS <article> PARA NOVOS PRODUTOS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato">
+    <div class="section-inner">
+      <h2 class="section-title">Contato e Orçamentos</h2>
+      <p class="section-subtitle">
+        Centralize aqui os canais oficiais da PEMACO EXCLUSIVE para dúvidas,
+        orçamentos e acompanhamento de pedidos.
+      </p>
+
+      <div class="contato-grid">
+        <div class="card">
+          <div class="sobre-pill">Canais de atendimento</div>
+          <div class="contato-info">
+            <!-- TODO: Substituir pelos dados reais da empresa -->
+            <div class="contato-item">
+              <strong>WhatsApp:</strong> (XX) XXXXX-XXXX
+            </div>
+            <div class="contato-item">
+              <strong>Telefone fixo:</strong> (XX) XXXX-XXXX
+            </div>
+            <div class="contato-item">
+              <strong>E-mail:</strong> contato@pemacoexclusive.com.br
+              <!-- Exemplo, pode mudar -->
+            </div>
+            <div class="contato-item">
+              <strong>Endereço:</strong> Rua Exemplo, nº 123 — Bairro —
+              Cidade/UF
+            </div>
+            <div class="contato-item">
+              <strong>WhatsApp direto para orçamento:</strong><br />
+              <a
+                href="https://wa.me/55DDDNUMERO?text=Ol%C3%A1%2C%20gostaria%20de%20um%20or%C3%A7amento%20dos%20produtos%20do%20cat%C3%A1logo%20PEMACO%20EXCLUSIVE."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Clique aqui para chamar no WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="sobre-pill">Formulário de contato</div>
+          <!-- Este formulário é apenas visual no momento.
+               Futuramente você pode integrar com algum backend, SheetDB,
+               formulário do Google, etc. -->
+          <form>
+            <div>
+              <label for="nome">Nome</label>
+              <input
+                type="text"
+                id="nome"
+                placeholder="Digite seu nome"
+                required
+              />
+            </div>
+            <div>
+              <label for="telefone">Telefone / WhatsApp</label>
+              <input
+                type="tel"
+                id="telefone"
+                placeholder="(XX) XXXXX-XXXX"
+              />
+            </div>
+            <div>
+              <label for="produto"
+                >Produto(s) de interesse (código ou descrição)</label
+              >
+              <input
+                type="text"
+                id="produto"
+                placeholder="Ex.: PEX-001, porcelanato marmorizado 84x84"
+              />
+            </div>
+            <div>
+              <label for="mensagem">Mensagem</label>
+              <textarea
+                id="mensagem"
+                rows="3"
+                placeholder="Descreva brevemente sua necessidade..."
+              ></textarea>
+            </div>
+            <button type="button" class="btn btn-primary">
+              Enviar (a configurar)
+            </button>
+            <small style="color: #6b7280">
+              *Neste momento o botão é apenas ilustrativo. Depois podemos
+              integrar com envio por e-mail, API, planilha, etc.
+            </small>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        &copy; <span id="ano-atual"></span> PEMACO EXCLUSIVE. Todos os direitos
+        reservados.
+      </div>
+      <div>
+        Catálogo desenvolvido em HTML. <!-- Você pode colocar seu nome aqui -->
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Atualiza ano do rodapé automaticamente
+    document.getElementById("ano-atual").textContent =
+      new Date().getFullYear();
+
+    // Filtro simples de categorias do catálogo
+    const botoesFiltro = document.querySelectorAll(".btn-filtro");
+    const produtos = document.querySelectorAll(".produto-card");
+
+    botoesFiltro.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const categoria = btn.getAttribute("data-categoria");
+
+        botoesFiltro.forEach((b) => b.classList.remove("ativo"));
+        btn.classList.add("ativo");
+
+        produtos.forEach((produto) => {
+          const catProduto = produto.getAttribute("data-categoria");
+          if (categoria === "todos" || catProduto === categoria) {
+            produto.style.display = "flex";
+          } else {
+            produto.style.display = "none";
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
